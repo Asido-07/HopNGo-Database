@@ -31,59 +31,73 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
     <style>
-        body {
-            background-color: #f4f7f6;
-            font-family: 'Arial', sans-serif;
-        }
-        .login-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .login-card {
-            padding: 2rem;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
-        .login-card h2 {
+        .signup-container {
+            flex: 1;
             text-align: center;
-            margin-bottom: 1.5rem;
+        }
+
+        .signup-box {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 70%;
+            margin: auto;
+        }
+
+        .signup-box h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
             color: #333;
         }
-        .form-control {
-            border-radius: 50px;
-            padding: 0.75rem 1.25rem;
-        }
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #4e73df;
-        }
-        .btn-login {
-            background-color: #4e73df;
-            color: #ffffff;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
+
+        input {
             width: 100%;
-            transition: background-color 0.3s ease;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-        .btn-login:hover {
-            background-color: #3b5db2;
+
+        input[type="submit"] {
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
         }
-        .forgot-password {
-            text-align: right;
-            display: block;
-            margin-top: 0.5rem;
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
-        .forgot-password a {
-            color: #4e73df;
-            text-decoration: none;
+
+        .registration-message {
+            color: #4CAF50;
+            font-size: 1.2em;
+            margin-top: 20px;
+            font-weight: bold;
         }
-        .forgot-password a:hover {
+
+        .signup-message {
+            color: #333;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .signup-link {
+            color: #333;
             text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -170,39 +184,55 @@
 	</div>
 	<!-- end breadcrumb section -->
      <!--register-->
-<div class="login-container">
-    <div class="login-card">
-        <h2>Register to HopNGo</h2>
-        <form>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+<div class="signup-container">
+            <div class="signup-box">
+                <h2>Sign Up</h2>
+               
+                <form action="SignUp.php" method="post">
+                    <label for="newUsername">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                    <br>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                    <br>
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="firstName" id="firstName" required>
+                    <br>
+					<label for="lastName">Last Name:</label>
+                    <input type="text" name="lastName" id="lastName" required>
+                    <br>
+                    <label for="address">Address:</label>
+                    <input type="text" name="address" id="address" required>
+                    <br>
+					<br>
+					
+                    <button name="register" value="Sign Up">Sign Up</button>
+                </form>
+				
+				<div id="registration-message" class="registration-message">
+					<?php
+						if(isset($_POST['register'])){
+							$uname = $_POST['username'];
+							$pass = md5($_POST['password']);
+							$fname = $_POST['firstName'];
+							$lname = $_POST['lastName'];
+							$address = $_POST['address'];
+							$sql_insert = "INSERT INTO login(Username,Password,Firstname,Lastname,Address) VALUES('$uname','$pass','$fname','$lname','$address')";
+							$result = mysqli_query($conn, $sql_insert);
+							if($result){
+								echo "REGISTERED SUCCESSFULLY";
+							} else {
+								echo "Error: " . mysqli_error($conn);
+							}
+						}
+					?>
+				</div>
+                
+                <div class="signup-message">
+                    Already have an account? <a href="Home.php" class="signup-link">Login here</a>.
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
-            </div>
-            <div class="mb-3">
-                <label for="Firstname" class="form-label">Firstname</label>
-                <input type="text" class="form-control" id="firstname" placeholder="Enter your Firstname" required>
-            </div>
-            <div class="mb-3">
-                <label for="Surname" class="form-label">Surname</label>
-                <input type="text" class="form-control" id="surname" placeholder="Enter your Surname" required>
-            </div>
-            <div class="mb-3">
-                <label for="Email" class="form-label">Password</label>
-                <input type="" class="form-control" id="password" placeholder="Enter your password" required>
-            </div>
-            <div class="forgot-password">
-                <a href="register.html">Don't have an account?</a>
-            </div>
-            <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-login">Login</button>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 <!--end register-->
 
 <!-- footer -->
