@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $registration_message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $uname = trim($_POST['username']);
-    $pass = md5(trim($_POST['password']));
+    $pass = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Using password_hash
     $fname = trim($_POST['firstName']);
     $sname = trim($_POST['surname']);
     $addr = trim($_POST['address']);
@@ -27,17 +27,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     if (empty($uname) || empty($pass) || empty($fname) || empty($sname) || empty($addr) || empty($email)) {
         $registration_message = "All fields are required!";
     } else {
-        // Insert data into the database including email
-        $sql_insert = "INSERT INTO registration (username, password, firstname, surname, address, email) 
-                       VALUES ('$uname', '$pass', '$fname', '$sname', '$addr', '$email')";
-        if ($conn->query($sql_insert) === TRUE) {
+        // Insert data into the registration table
+        $sql_insert_registration = "INSERT INTO accounts (username, password, firstname, surname, address, email) 
+                                    VALUES ('$uname', '$pass', '$fname', '$sname', '$addr', '$email')";
+
+        if ($conn->query($sql_insert_registration) === TRUE) {
             $registration_message = "Registered successfully!";
         } else {
-            $registration_message = "Error: " . $conn->error;
+            $registration_message = "Error inserting into accounts table: " . $conn->error;
         }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
     <!-- title -->
-    <title>Booking</title>
+    <title>Registration</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -71,50 +73,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     <!-- responsive -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
+        /* Signup container */
         .signup-container {
-            flex: 1;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
 
         .signup-box {
-            background-color: #f4f4f4;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            width: 70%;
-            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
         }
 
         .signup-box h2 {
             color: #333;
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
             margin-top: 10px;
-            color: #333;
+            color: #555;
+            font-weight: 600;
         }
 
         input {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
 
         input[type="submit"] {
-            background-color: #4CAF50; /* Green color */
+            background-color: #4CAF50;
             color: white;
-            padding: 10px 15px;
-            margin-top: 10px;
+            padding: 12px 20px;
+            margin-top: 15px;
             border: none;
             border-radius: 5px;
+            font-size: 18px;
             cursor: pointer;
-            font-size: 1em;
         }
 
         input[type="submit"]:hover {
@@ -130,45 +137,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 
         .signup-message {
             color: #333;
-            font-size: 0.9em;
-            margin-top: 10px;
+            font-size: 1em;
+            margin-top: 15px;
         }
 
         .signup-link {
-            color: #333;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .signup-link:hover {
             text-decoration: underline;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
+
     <!-- register -->
     <div class="signup-container">
         <div class="signup-box">
-            <h2>Sign Up</h2>
+            <h2>Create Account</h2>
             <form action="" method="post">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" required>
+
                 <label for="password">Password:</label>
                 <input type="password" name="password" id="password" required>
+
                 <label for="firstName">First Name:</label>
                 <input type="text" name="firstName" id="firstName" required>
+
                 <label for="surname">Surname:</label>
                 <input type="text" name="surname" id="surname" required>
+
                 <label for="address">Address:</label>
                 <input type="text" name="address" id="address" required>
+
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" required>
-                <button type="submit" name="register">Sign Up</button>
+
+                <input type="submit" name="register" value="Sign Up">
             </form>
-            <div id="registration-message" class="registration-message">
+
+            <div class="registration-message">
                 <?php echo $registration_message; ?>
             </div>
+
             <div class="signup-message">
                 Already have an account? <a href="login.php" class="signup-link">Login here</a>.
             </div>
         </div>
     </div>
     <!-- end register -->
+
 </body>
 </html>
