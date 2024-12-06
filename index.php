@@ -111,7 +111,7 @@
 							<h1>HopNGo</h1>
 							<div class="hero-btns">
 								<a href="login.php" class="boxed-btn">Book now!</a>
-								<a href="contact.html" class="bordered-btn">Contact Us</a>
+								<a href="contact.php" class="bordered-btn">Contact Us</a>
 							</div>
 						</div>
 					</div>
@@ -194,7 +194,7 @@
 						<ul>
 							<li><a href="index.php">Home</a></li>
 							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>
 				</div>
