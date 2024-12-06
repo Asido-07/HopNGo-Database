@@ -152,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <!-- logo -->
                         <div class="site-logo">
                             <a href="index.html">
-                                <img src="Booking-logo.png" alt="">
+                                <img src="logo.png" alt="">
                             </a>
                         </div>
                         <!-- logo -->

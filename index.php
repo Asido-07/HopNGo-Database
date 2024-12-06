@@ -49,7 +49,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.html">
+							<a href="index.php">
 								<img src="logo.png" alt="">
 							</a>
 						</div>
@@ -58,10 +58,10 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="index.html">Home</a>
+								<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.html">About</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								<li><a href="contact.php">Contact</a></li>
 								</li>
 								<li>
 									<div class="header-icons">
