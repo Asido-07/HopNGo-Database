@@ -2174,16 +2174,26 @@ a.video-play-btn {
 }
 
 .team-bg-1 {
-  background-image: url(../img/team/team-1.jpg);
+  background-image: url(../img/team/sueno.png);
 }
 
 .team-bg-2 {
-  background-image: url(../img/team/team-2.jpg);
+  background-image: url(../img/team/asido.png);
 }
 
 .team-bg-3 {
-  background-image: url(../img/team/team-3.jpg);
+  background-image: url(../img/team/ronnie.jpg);
 }
+
+.team-bg-5 {
+  background-image: url(../img/team/moss.png);
+}
+
+.team-bg-6 {
+  background-image: url(../img/team/ryan.jpg);
+}
+
+
 
 .team-bg-4 {
   background-image: url(../img/team/team-4.jpg);
