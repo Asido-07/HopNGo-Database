@@ -1,0 +1,13 @@
+CREATE TABLE BookingDetails (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    time TIME NOT NULL,
+    date DATE NOT NULL,
+    booking_address TEXT NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    message TEXT,
+    destination_address TEXT NOT NULL,
+    payment_method VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
