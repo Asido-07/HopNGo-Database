@@ -50,7 +50,7 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.html">
-								<img src="logo.png" alt="">
+								<img src="../logo.png" alt="">
 							</a>
 						</div>
 						<!-- logo -->
@@ -112,7 +112,7 @@
 							<h1>HopNGo</h1>
 							<div class="hero-btns">
 								<a href="shop.html" class="boxed-btn">Book now!</a>
-								<a href="contact.html" class="bordered-btn">Contact Us</a>
+								<a href="contact.php" class="bordered-btn">Contact Us</a>
 							</div>
 						</div>
 					</div>
